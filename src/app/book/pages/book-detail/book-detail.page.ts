@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BookService } from '../../services/book.service';
 
 
@@ -20,23 +21,26 @@ export class BookDetailPage implements OnInit {
 
   book: Book | undefined;
 
-  constructor(private bookService: BookService) { }
+  constructor(
+    private bookService: BookService,
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
     this.bookService.getBooks()
       .subscribe((result: any) => {
-        if (!result || !result.data) {
+        const bookId = this.route.snapshot.paramMap.get('id');
+        if (!result || !result.data || !bookId) {
           return;
         }
 
-        console.log(result);
         this.book = result.data.map((item: any): Book => ({
           id: item.id,
           title: item.attributes.content, 
           imageUrl: item.attributes.display_properties.image, 
           type: item.attributes.display_properties.type,
           lastModifiedDate: new Date()
-        })).find((item: Book) => item.id === '1');
+        })).find((item: Book) => item.id === bookId);
       });
   }
 
