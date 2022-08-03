@@ -1,0 +1,8 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <a [routerLink]="['/']" class="me-3">Angular Book</a>
+        <img width="50" src="/assets/logo.png" [@openClose]="isOpen ? 'open' : 'closed'" />
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
+  

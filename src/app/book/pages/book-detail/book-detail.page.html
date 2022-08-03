@@ -1,0 +1,21 @@
+<div style="padding: 25px; display:flex; justify-content:center;">
+    <mat-card style="width: 500px; display:flex; align-items:center; flex-direction:column;" *ngIf="book">
+        <div>
+            <h2>
+                {{book.title}}
+            </h2>
+        </div>
+        <div style="margin-bottom: 25px;">
+            <img [src]="book.imageUrl" />
+        </div>
+        <div>
+            Book Type: {{book.type}}
+        </div>
+        <div [appTooltip]="book.lastModifiedDate?.toLocaleString() || ''" style="margin-bottom: 20px;">
+            Last Modified Date: {{book.lastModifiedDate | date}}
+        </div>
+        <div>
+            <a mat-raised-button color="default" [routerLink]="['/book/book-list']">Back</a>
+        </div>
+    </mat-card>
+</div>
